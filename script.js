@@ -25,6 +25,7 @@
       trole: 'Ina ni Ferdinand Sr.',
       years: '',
       relation: 'Asawa ni Mariano Marcos · Ugat ng pamilya',
+      photo: 'images/josefa.jpg',
       status: 'private',
       facts: [
         'Asawa ni Mariano Marcos',
