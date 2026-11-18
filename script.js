@@ -1,17 +1,7 @@
-/* =========================================================
-   Political Dynasty sa Pilipinas — Marcos Family Tree
-   ---------------------------------------------------------
-   PAANO MAG-EDIT:
-   • Impormasyon ng bawat tao  → PEOPLE (sa ibaba)
-   • Hugis ng family tree      → TREE
-   • Larawan: ilagay sa folder na "images" at gamitin ang
-     pangalan na nasa field na `photo`. Kung wala pang
-     larawan, initials muna ang lalabas.
-   ========================================================= */
 (() => {
   'use strict';
 
-  /* ---------- DATA ---------- */
+
   const PEOPLE = {
     mariano: {
       name: 'Mariano Marcos',
@@ -214,23 +204,23 @@
     }
   };
 
-  // Kulay ng full-screen profile ng bawat tao (a → b = gradient, acc = kulay ng accent)
+ 
   const THEMES = {
-    ferdinand: { a: '#081433', b: '#1b3a85', acc: '#9dbdff' },   // navy
-    imelda:    { a: '#3a0a2a', b: '#9b2a6b', acc: '#ffb7da' },   // magenta
-    imee:      { a: '#04291f', b: '#0c6b55', acc: '#7cecc8' },   // emerald
-    bongbong:  { a: '#330812', b: '#9c1f33', acc: '#ffb9a6' },   // crimson
-    liza:      { a: '#3d2506', b: '#a8690d', acc: '#ffdc94' },   // amber
-    irene:     { a: '#141a2b', b: '#3f4d6e', acc: '#c5d0ea' },   // slate
-    matthew:   { a: '#04262f', b: '#0f7d8f', acc: '#86eaf9' },   // teal
-    sandro:    { a: '#170d47', b: '#4b35b8', acc: '#c9bfff' },   // violet
-    mariano:   { a: '#241709', b: '#6e4a1d', acc: '#f1d29a' },   // sepia
-    josefa:    { a: '#10252b', b: '#35707a', acc: '#b5eaf0' },   // steel teal
-    tommy:     { a: '#1f2406', b: '#6b7a14', acc: '#e2ee8f' },   // olive
-    greggy:    { a: '#2b1408', b: '#8a4a1f', acc: '#ffc79a' }    // copper
+    ferdinand: { a: '#081433', b: '#1b3a85', acc: '#9dbdff' },  
+    imelda:    { a: '#3a0a2a', b: '#9b2a6b', acc: '#ffb7da' },   
+    imee:      { a: '#04291f', b: '#0c6b55', acc: '#7cecc8' },   
+    bongbong:  { a: '#330812', b: '#9c1f33', acc: '#ffb9a6' },  
+    liza:      { a: '#3d2506', b: '#a8690d', acc: '#ffdc94' },   
+    irene:     { a: '#141a2b', b: '#3f4d6e', acc: '#c5d0ea' },   
+    matthew:   { a: '#04262f', b: '#0f7d8f', acc: '#86eaf9' },   
+    sandro:    { a: '#170d47', b: '#4b35b8', acc: '#c9bfff' },   
+    mariano:   { a: '#241709', b: '#6e4a1d', acc: '#f1d29a' },   
+    josefa:    { a: '#10252b', b: '#35707a', acc: '#b5eaf0' },  
+    tommy:     { a: '#1f2406', b: '#6b7a14', acc: '#e2ee8f' },  
+    greggy:    { a: '#2b1408', b: '#8a4a1f', acc: '#ffc79a' }   
   };
 
-  // Hugis ng tree: `unit` = isang tao o mag-asawa, `children` = mga anak
+ 
   const TREE = {
     unit: ['mariano', 'josefa'],
     children: [{
@@ -243,7 +233,7 @@
     }]
   };
 
-  // Pagkakasunod-sunod sa modal (← →)
+  
   const ORDER = ['mariano', 'josefa', 'ferdinand', 'imelda', 'imee', 'tommy', 'bongbong', 'liza', 'irene', 'greggy', 'matthew', 'sandro'];
 
   const STATUS_LABEL = {
@@ -252,7 +242,7 @@
     private: 'Walang posisyon sa gobyerno'
   };
 
-  /* ---------- HELPERS ---------- */
+  
   const $  = (sel, root = document) => root.querySelector(sel);
   const el = (tag, cls, html) => {
     const e = document.createElement(tag);
@@ -263,22 +253,20 @@
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const EASE = 'cubic-bezier(.65,0,.25,1)';
 
-  /* ---------- ELEMENTS ---------- */
+ 
   const welcome   = $('#welcome');
   const treeStage = $('#treeStage');
   const treeRoot  = $('#tree');
   const inner     = $('#treeInner');
   const svg       = $('#links');
 
-  let state = 'welcome';          // welcome | transition | tree
+  let state = 'welcome';         
   let revealed = false;
   let settleTimer = 0;
   let currentId = null;
   let lastFocus = null;
 
-  /* =========================================================
-     PARTICLES (background na gumagalaw na network)
-     ========================================================= */
+
   function Particles(canvas, { count = 70, link = 140 } = {}) {
     const ctx = canvas.getContext('2d');
     let w = 0, h = 0, pts = [], raf = 0, running = false;
@@ -329,9 +317,7 @@
   const pWelcome = Particles($('#pWelcome'), { count: 80, link: 150 });
   const pTree    = Particles($('#pTree'),    { count: 55, link: 130 });
 
-  /* =========================================================
-     WELCOME TITLE (letter-by-letter)
-     ========================================================= */
+ 
   (function splitTitle() {
     const t = $('#welcomeTitle');
     const text = t.textContent.trim();
@@ -345,14 +331,12 @@
     });
   })();
 
-  /* =========================================================
-     BUILD FAMILY TREE
-     ========================================================= */
+ 
   const branches = [];
   const PERSON_EL = {};
   const genCounter = {};
 
-  // ilalagay ang mukha sa gitna ng bilog at i-zoom nang tama, kahit anong laki ng larawan
+ 
   function frameImage(img, fit) {
     const nw = img.naturalWidth, nh = img.naturalHeight, m = Math.min(nw, nh);
     const z  = fit.z || Math.min(2.1, Math.max(1, .52 / fit.fw));
@@ -374,7 +358,7 @@
     face.appendChild(ini);
     av.appendChild(face);
 
-    if (p.photo) {                       // lalabas lang kapag may file talaga
+    if (p.photo) {                    
       const img = new Image();
       img.alt = p.name;
       img.decoding = 'async';
@@ -436,9 +420,7 @@
 
   treeRoot.appendChild(buildBranch(TREE, 0));
 
-  /* =========================================================
-     LINES (SVG connectors na "iginuguhit" ng animation)
-     ========================================================= */
+  
   let paths = [];
 
   function elbow(px, py, cx, cy, midY) {
@@ -463,17 +445,17 @@
       const bond = unit.querySelector('.bond');
 
       let px, py;
-      if (bond) {                         // magsisimula sa bond ng mag-asawa
+      if (bond) {                        
         const r = bond.getBoundingClientRect();
         px = r.left + r.width / 2 - base.left;
         py = r.bottom - base.top + 8;
-      } else {                            // isang magulang
+      } else {                            
         const r = unit.getBoundingClientRect();
         px = r.left + r.width / 2 - base.left;
         py = r.bottom - base.top + 6;
       }
       const gen = +b.dataset.gen;
-      // ang pahalang na linya ay nasa gitna ng espasyo sa ilalim ng pangalan, hindi tumatawid sa text
+    
       const unitBottom = unit.getBoundingClientRect().bottom - base.top;
 
       [...kids.children].forEach(cb => {
@@ -484,7 +466,7 @@
 
         const midY = (Math.max(unitBottom, py) + cy) / 2;
         const d = elbow(px, py, cx, cy, midY);
-        ['glow', 'main'].forEach(kind => {          // glow = malambot na liwanag sa likod ng linya
+        ['glow', 'main'].forEach(kind => {         
           const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
           path.setAttribute('d', d);
           if (kind === 'glow') path.setAttribute('class', 'glow');
@@ -500,8 +482,7 @@
           }
           paths.push(path);
         });
-
-        // maliit na liwanag na dumadaloy sa linya (lalabas pagkatapos ng buong animation)
+)
         const flow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         flow.setAttribute('d', d);
         flow.setAttribute('class', 'flow');
@@ -516,7 +497,7 @@
 
   function revealLines() {
     revealed = true;
-    // dalawang frame para siguradong mag-transition
+    
     requestAnimationFrame(() => requestAnimationFrame(() => {
       paths.forEach(p => { p.style.strokeDashoffset = 0; });
     }));
@@ -537,9 +518,7 @@
     document.fonts.ready.then(() => { if (!revealed) drawLines(true); });
   }
 
-  /* =========================================================
-     TRANSITION: WELCOME → TREE  (click kahit saan)
-     ========================================================= */
+
   function goToTree(x, y) {
     if (state !== 'welcome') return;
     state = 'transition';
@@ -559,7 +538,7 @@
     );
 
     setTimeout(() => {
-      document.body.classList.add('tree-active');   // simula ng staged animation
+      document.body.classList.add('tree-active');  
       revealLines();
     }, reduceMotion ? 0 : 650);
     clearTimeout(settleTimer);
@@ -576,7 +555,7 @@
 
   welcome.addEventListener('click', e => goToTree(e.clientX, e.clientY));
 
-  /* balik sa Welcome */
+  
   function backToWelcome() {
     if (state !== 'tree' || pfState !== 'closed') return;
     state = 'transition';
@@ -604,11 +583,7 @@
   }
   $('#backBtn').addEventListener('click', backToWelcome);
 
-  /* =========================================================
-     PROFILE (full-screen na detalye)
-     Lilipad ang mukha papunta sa gilid, lalaganap ang kulay ng
-     background mula sa mukha, at lalabas ang info sa gitna.
-     ========================================================= */
+
   const pf      = $('#profile');
   const pfBgs   = [$('#pfBgA'), $('#pfBgB')];
   const pfSide  = $('#pfSide');
@@ -622,7 +597,7 @@
   const pfClose = $('#pClose');
   const pfNav   = $('#pfNav');
 
-  let pfState  = 'closed';          // closed | opening | open | switching | closing
+  let pfState  = 'closed';        
   let activeBg = pfBgs[0];
 
   const T        = ms => (reduceMotion ? 1 : ms);
@@ -638,7 +613,7 @@
   const fadeOut  = (els, ms) => els.map(e =>
     e.animate([{ opacity: 1 }, { opacity: 0 }], { duration: T(ms), easing: 'ease-in', fill: 'forwards' }));
 
-  // mga tuldok sa ibaba para lumipat sa kahit sinong miyembro
+ 
   ORDER.forEach(id => {
     const b = el('button', 'pf-dot');
     b.type = 'button';
@@ -693,7 +668,7 @@
     [...pfDots.children].forEach(d => d.classList.toggle('on', d.dataset.id === id));
   }
 
-  // i-restart ang stagger animation ng mga text
+  
   function restartText(delay) {
     pf.style.setProperty('--d', delay + 's');
     pf.classList.remove('swap');
@@ -701,7 +676,7 @@
     pf.classList.add('swap');
   }
 
-  /* ---------- BUKAS: lilipad ang mukha, lalaganap ang kulay ---------- */
+ 
   function openProfile(id, personEl) {
     if (pfState !== 'closed' || state !== 'tree') return;
     pfState = 'opening';
@@ -744,7 +719,7 @@
     });
   }
 
-  /* ---------- LIPAT: ibang tao, ibang kulay ---------- */
+ 
   async function switchTo(id, dir) {
     if (pfState !== 'open' || id === currentId) return;
     pfState = 'switching';
@@ -793,7 +768,7 @@
     switchTo(ORDER[(i + dir + ORDER.length) % ORDER.length], dir);
   }
 
-  /* ---------- SARA: bumabalik ang mukha sa family tree ---------- */
+  
   function closeProfile() {
     if (pfState !== 'open') return;
     pfState = 'closing';
@@ -832,7 +807,7 @@
   $('#pPrev').addEventListener('click', () => step(-1));
   $('#pNext').addEventListener('click', () => step(1));
 
-  // swipe sa phone
+ 
   let sx = 0, sy = 0;
   pf.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
   pf.addEventListener('touchend', e => {
@@ -840,9 +815,7 @@
     if (pfState === 'open' && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
   }, { passive: true });
 
-  /* =========================================================
-     KEYBOARD
-     ========================================================= */
+
   document.addEventListener('keydown', e => {
     if (state === 'welcome' && ['Enter', ' ', 'ArrowRight', 'ArrowDown'].includes(e.key)) {
       e.preventDefault();
@@ -856,8 +829,6 @@
     }
   });
 
-  /* =========================================================
-     START
-     ========================================================= */
+
   pWelcome.start();
 })();
