@@ -12,6 +12,7 @@
       relation: 'Ama ni Ferdinand Sr. · Ugat ng pamilya',
       status: 'former',
       first: 'Kinatawan ng Ilocos Norte (2nd District), 1925–1931',
+      photo: 'images/mariano marcos.jpg',
       facts: [
         'Asawa ni Josefa Edralin',
         'Ama nina Ferdinand Sr., Pacifico, Elizabeth, at Fortuna',
@@ -141,6 +142,7 @@
       years: '',
       relation: 'Asawa ni Sen. Imee Marcos',
       status: 'private',
+      photo: 'images/Tommy.jpg',
       trole: 'Dating coach',
       facts: [
         'Golfer at dating propesyonal na basketball coach',
@@ -155,6 +157,7 @@
       years: '',
       relation: 'Asawa ni Irene Marcos Araneta',
       status: 'private',
+      greggy
       trole: 'Asawa ni Irene',
       facts: [
         'Asawa ni Irene Marcos Araneta',
