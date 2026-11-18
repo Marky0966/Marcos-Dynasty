@@ -1,7 +1,3 @@
-/* =========================================================
-   Political Dynasty sa Pilipinas — Marcos Family Tree
-   ========================================================= */
-
 :root {
   --bg: #060914;
   --gold: #d4af37;
@@ -12,7 +8,6 @@
   --line: rgba(212, 175, 55, .6);
   --ease: cubic-bezier(.22, .8, .2, 1);
 
-  /* laki ng mga mukha — nag-aadjust ayon sa screen */
   --av: clamp(44px, min(7vw, 7.8vh), 112px);
   --pad: clamp(24px, 4vw, 56px);
   --vgap: clamp(14px, 3.2vh, 70px);
@@ -54,9 +49,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
 .fade-in { animation: fadeUp .9s var(--ease) .1s both; }
 
-/* =========================================================
-   1. WELCOME
-   ========================================================= */
+
 .welcome {
   display: grid;
   place-items: center;
@@ -153,12 +146,10 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   color: var(--gold-l);
 }
 
-/* paglipat palabas */
+
 .welcome.leaving .welcome-content { transform: scale(1.1); opacity: 0; filter: blur(8px); }
 
-/* =========================================================
-   2. FAMILY TREE
-   ========================================================= */
+
 .tree-stage {
   display: flex;
   flex-direction: column;
@@ -250,7 +241,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   width: max-content;
 }
 
-/* linya ng koneksyon */
+
 .links {
   position: absolute;
   inset: 0;
@@ -269,12 +260,12 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 }
 .links path.glow { stroke: rgba(212, 175, 55, .14); stroke-width: 9; }
 
-/* istruktura */
+
 .branch   { display: flex; flex-direction: column; align-items: center; }
 .unit     { display: flex; align-items: flex-start; justify-content: center; }
 .children { display: flex; align-items: flex-start; justify-content: center; gap: var(--hgap); margin-top: var(--vgap); }
 
-/* bond ng mag-asawa */
+
 .bond {
   position: relative;
   z-index: 0;
@@ -301,7 +292,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .tree-active .bond { animation: bondIn .9s var(--ease) forwards; animation-delay: calc(.95s + var(--gen) * 1.1s); }
 @keyframes bondIn { to { opacity: 1; transform: scaleX(1); } }
 
-/* tao */
+
 .person {
   position: relative;
   z-index: 1;
@@ -407,9 +398,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 }
 
 
-/* =========================================================
-   3. PROFILE (full-screen na detalye)
-   ========================================================= */
+
 .person.ghosted .avatar { visibility: hidden; }
 
 .profile {
@@ -428,7 +417,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 }
 .profile.open { visibility: visible; pointer-events: auto; }
 
-/* kulay ng background (dalawang layer para sa smooth na palitan) */
+
 .pf-bg {
   position: absolute;
   inset: 0;
@@ -449,7 +438,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
           mask-image: radial-gradient(ellipse at 30% 50%, #000 10%, transparent 72%);
 }
 
-/* malaking initials sa likod */
+
 .pf-ghost {
   position: absolute;
   z-index: 3;
@@ -486,7 +475,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 }
 .pf-stage::-webkit-scrollbar { display: none; }
 
-/* mukha sa gilid */
+
 .pf-side {
   grid-column: 1;
   justify-self: center;
@@ -555,7 +544,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   box-shadow: 0 0 10px var(--tone, #fff);
 }
 
-/* impormasyon sa gitna */
+
 .pf-info { grid-column: 2; min-width: 0; }
 .pf-info .eyebrow { color: var(--acc); }
 
@@ -637,7 +626,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   transform: rotate(45deg);
 }
 
-/* sara at lipat */
+
 .pf-close {
   position: absolute;
   z-index: 6;
@@ -699,7 +688,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   outline-offset: 3px;
 }
 
-/* ---------- animations ng text ---------- */
+
 @keyframes pfUp    { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 @keyframes pfFade  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes nameIn  { from { transform: translateY(110%); } to { transform: none; } }
@@ -721,9 +710,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .profile.open .pf-close,
 .profile.open .pf-nav       { animation: pfFade .9s ease .9s both; }
 
-/* =========================================================
-   Design pass: grain, sunburst, seal, corners, flow lines
-   ========================================================= */
+
 .grain {
   position: absolute;
   inset: 0;
@@ -733,7 +720,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* walong sinag, parang araw sa watawat */
+
 .sunburst {
   position: absolute;
   left: 50%;
@@ -755,7 +742,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 @keyframes sbIn    { from { opacity: 0; } to { opacity: 1; } }
 @keyframes sunSpin { to { transform: rotate(360deg); } }
 
-/* gintong singsing sa likod ng title */
+
 .seal {
   position: absolute;
   left: 50%;
@@ -780,7 +767,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .seal i:nth-child(3) { inset: -8%; border-color: rgba(255, 255, 255, .07); animation-delay: .7s; }
 @keyframes ringIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
 
-/* sulok na parang frame ng presentation */
+
 .corner {
   position: absolute;
   width: clamp(26px, 3.6vw, 46px);
@@ -796,7 +783,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 
 .welcome .title { filter: drop-shadow(0 10px 44px rgba(212, 175, 55, .22)); }
 
-/* tree: palamuti sa ilalim ng title */
+
 .head-rule {
   position: relative;
   width: min(220px, 50vw);
@@ -817,7 +804,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 }
 .tree-active .head-rule { animation: fadeDown .9s var(--ease) .55s forwards; }
 
-/* liwanag na dumadaloy sa mga linya ng tree */
+
 .links path.flow {
   stroke: #fff3c4;
   stroke-width: 2.4;
@@ -827,7 +814,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .tree-settled .links path.flow { opacity: 1; animation: flow 6.5s linear infinite; }
 @keyframes flow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: var(--end); } }
 
-/* profile: sinag sa likod ng mukha at grain */
+
 .profile .pf-grain { z-index: 3; opacity: 0; transition: opacity 1.4s ease; }
 .profile.landed .pf-grain { opacity: .07; }
 .pf-rays {
@@ -850,9 +837,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 }
 .profile.landed .pf-rays { opacity: 1; }
 
-/* =========================================================
-   Responsive & accessibility
-   ========================================================= */
+
 @media (max-width: 1180px) {
   .profile { --pf-av: clamp(140px, min(26vw, 44vh), 300px); }
   .pf-stage {
